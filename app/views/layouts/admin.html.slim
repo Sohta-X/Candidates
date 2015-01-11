@@ -1,0 +1,64 @@
+doctype html
+html lang="en"
+  head
+    meta charset="utf-8"
+    meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    title= content_for?(:title) ? yield(:title) : "CandidateManager"
+    = csrf_meta_tags
+
+    /! Le HTML5 shim, for IE6-8 support of HTML elements
+    /[if lt IE 9]
+      = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"
+    = stylesheet_link_tag "application", :media => "all"
+    = favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144'
+    = favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114'
+    = favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72'
+    = favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png'
+    = favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'
+    = javascript_include_tag "application"
+
+
+
+  body
+    .navbar.navbar-fluid-top
+      .navbar-inner
+        .container-fluid
+          a.btn.btn-navbar data-target=".nav-collapse" data-toggle="collapse"
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.brand href="/admin/candidates" CandidateManager
+          .container-fluid.nav-collapse
+            ul.nav
+              = render partial: 'layouts/header'
+
+    .container-fluid
+      .row-fluid
+        .span3
+          .well.sidebar-nav
+            ul.nav.nav-list
+              li.nav-header Search
+              p
+                = search_form_for @query, url: request.url, html: {class: 'form-horizonta'} do |f|
+                  div.input-prepend
+                    span.add-on
+                      |id
+                    = f.text_field :id_eq, class: 'input-small'
+                  div.input-prepend
+                    span.add-on
+                      |name
+                    = f.text_field :name_cont, class: 'input-small'
+                  div.input-prepend
+                    span.add-on
+                      |country
+                    = f.select :country_id_eq, Country.all.map {|u| [u.title, u.id] }, {}, {class: 'span18'}
+                  div.input-prepend
+                    span.add-on
+                      |city
+                    = f.select :city_id_eq, City.all.map {|u| [u.title, u.id] }, {}, {class: 'span18'}
+                  li 
+                    = f.submit "search", class: 'btn'
+        .span9
+          = bootstrap_flash
+          = yield

@@ -1,0 +1,10 @@
+- if @candidate_memos.present?
+  h3 Memos
+  table.table
+    - @candidate_memos.each do |candidate_memo|
+      tr
+        th= CandidateDetail.human_attribute_name :name
+        td= candidate_memo.name
+      tr
+        th= CandidateDetail.human_attribute_name :sns_link
+        td= candidate_memo.memo

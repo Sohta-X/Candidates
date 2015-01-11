@@ -1,0 +1,15 @@
+table.table.table-striped
+  thead
+    tr
+      th= Candidate.human_attribute_name(:id)
+      th= Candidate.human_attribute_name(:name)
+      th= Candidate.human_attribute_name(:place)
+  tbody
+    - @candidates.each do |candidate|
+      tr
+        td= candidate.id
+        td= link_to candidate.name, admin_candidate_path(candidate)
+        td
+          = candidate.country.title
+          |/
+          = candidate.city.title

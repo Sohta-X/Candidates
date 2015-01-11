@@ -1,0 +1,10 @@
+- if @candidate_details.present?
+  h3 Detail
+  table.table
+    - @candidate_details.each do |candidate_detail|
+      tr
+        th= CandidateDetail.human_attribute_name :kind
+        td= candidate_detail.kind
+      tr
+        th= CandidateDetail.human_attribute_name :sns_link
+        td= candidate_detail.sns_link

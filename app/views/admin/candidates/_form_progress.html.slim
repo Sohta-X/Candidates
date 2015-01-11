@@ -1,0 +1,22 @@
+table.table.table-striped
+  thead
+    tr
+      th= Candidate.human_attribute_name(:id)
+      th= Candidate.human_attribute_name(:name)
+      th= Candidate.human_attribute_name(:place)
+      th= Candidate.human_attribute_name(:sent_at)
+      th= Candidate.human_attribute_name(:sent)
+    tbody
+      - @candidates.each do |candidate|
+        tr
+          td= candidate.id
+          td= candidate.name
+          td
+            = candidate.country.title
+            |/
+            = candidate.city.title
+          - if candidate.candidate_progress.present?
+            td= candidate.candidate_progress.sent_at
+          - else
+            td Not yet
+          td= check_box_tag 'candidates[]', candidate.id

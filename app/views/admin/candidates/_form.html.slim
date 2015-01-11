@@ -1,0 +1,64 @@
+= form_for [:admin, @candidate], html: {class: "form-horizontal"} do |f|
+  div.control-group
+    = f.label :name, class: 'control-label'
+    div.controls
+      = f.text_field :name
+  div.control-group
+    = f.label :country, class: 'control-label'
+    div.controls
+      = f.select :country_id, Country.all.map {|u| [u.title, u.id]}, {}, {class: 'form-control'}
+  div.control-group
+    = f.label :city, class: 'control-label'
+    div.controls
+      = f.select :city_id, City.all.map {|u| [u.title, u.id]}, {}, {class: 'form-control'}
+  div.control-group
+    = f.label :personal_url, class: 'control-label'
+    div.controls
+      = f.text_field :personal_url
+  div.control-group
+    = f.label :kind, class: 'control-label'
+    div.controls
+      = f.select :kind, Candidate::KIND
+  div.control-group
+    = f.label :phone, class: 'control-label'
+    div.controls
+      = f.number_field :phone
+  div.control-group
+    = f.label :email, class: 'control-label'
+    div.controls
+      = f.text_field :email
+  div.control-group
+    = f.label :image_url, class: 'control-label'
+    div.controls
+      = f.text_field :image
+  div.control-group
+    = f.label :status, class: 'control-label'
+    div.controls
+      = f.select :status, Candidate::STATUS
+  div.control-group
+    = f.label :probability, class: 'control-label'
+    div.controls
+      = f.select :probability, Candidate::Probability
+  = f.fields_for :candidate_details do |i|
+    h3
+      |SNS LINK
+    div.control-group
+      = i.label :kind, class: 'control-label'
+      div.controls
+        = i.text_field :kind
+    div.control-group
+      = i.label :sns_link, class: 'control-label'
+      div.controls
+        = i.text_field :sns_link
+    = f.fields_for :candidate_memos do |j|
+      h3
+        |memo
+      div.control-group
+        = j.label :name, class: 'control-label'
+        div.controls
+          = j.text_field :name
+      div.control-group
+        = j.label :memo, class: 'control-label'
+        div.controls
+          = j.text_field :memo
+  = f.submit 'SUBMIT', class: 'btn btn-primary'
