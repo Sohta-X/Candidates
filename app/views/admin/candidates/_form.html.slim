@@ -45,7 +45,7 @@
     div.control-group
       = i.label :kind, class: 'control-label'
       div.controls
-        = i.text_field :kind
+        = i.select :kind, CandidateDetail::KIND
     div.control-group
       = i.label :sns_link, class: 'control-label'
       div.controls

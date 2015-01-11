@@ -4,6 +4,8 @@ table.table.table-striped
       th= Candidate.human_attribute_name(:id)
       th= Candidate.human_attribute_name(:name)
       th= Candidate.human_attribute_name(:place)
+      th= Candidate.human_attribute_name(:link)
+      th= Candidate.human_attribute_name(:edit)
   tbody
     - @candidates.each do |candidate|
       tr
@@ -13,4 +15,8 @@ table.table.table-striped
           = candidate.country.title
           |/
           = candidate.city.title
+        td
+          -candidate.candidate_details.each do |detail|
+            = link_to CandidateDetail::KIND.key(detail.kind), detail.sns_link
+            | |
         td= link_to 'Edit', edit_admin_candidate_path(candidate), class: 'btn btn-success'
