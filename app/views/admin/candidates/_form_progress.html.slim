@@ -5,18 +5,31 @@ table.table.table-striped
       th= Candidate.human_attribute_name(:name)
       th= Candidate.human_attribute_name(:place)
       th= Candidate.human_attribute_name(:sent_at)
-      th= Candidate.human_attribute_name(:sent)
+      th= Candidate.human_attribute_name(:replied_at)
+      th= Candidate.human_attribute_name(:meeting_at)
     tbody
       - @candidates.each do |candidate|
         tr
-          td= candidate.id
-          td= candidate.name
+          td
+            label.checkbox
+              = check_box_tag 'candidates[]', candidate.id
+              = candidate.id
+          td= link_to candidate.name, admin_candidate_path(candidate)
           td
             = candidate.country.title
             |/
             = candidate.city.title
-          - if candidate.candidate_progress.present?
-            td= candidate.candidate_progress.sent_at
+          - if candidate.candidate_progress.present? and candidate.candidate_progress.sent_at.present?
+            td= candidate.candidate_progress.sent_at.strftime('%Y-%m-%d')
           - else
             td Not yet
-          td= check_box_tag 'candidates[]', candidate.id
+          - if candidate.candidate_progress.present? and candidate.candidate_progress.replied_at.present?
+            td= candidate.candidate_progress.replied_at.strftime('%Y-%m-%d')
+          - else
+            td Not yet
+          - if candidate.candidate_progress.present? and candidate.candidate_progress.meeting_at.present?
+            td= candidate.candidate_progress.meeting_at.strftime('%Y-%m-%d')
+          - else
+            td Not yet
+          td= link_to 'Reply', admin_candidate_reply_path(candidate), class: 'btn btn-success'
+          td= link_to 'Meeting', admin_candidate_meeting_path(candidate), class: 'btn btn-danger 	'

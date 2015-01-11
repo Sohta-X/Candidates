@@ -57,7 +57,7 @@ class Admin::CandidatesController < Admin::BaseController
     @candidate_ids.each do |id|
       @candidate = Candidate.find(id)
       @candidate_progress = @candidate.candidate_progress
-      if @candidate.candidate_progress.present?
+      if @candidate_progress.present?
         @candidate_progress.update(candidate_id: id, sent_at: Date.today)
       else
         @candidate_progress = CandidateProgress.new(candidate_id: id, sent_at: Date.today)
@@ -70,6 +70,30 @@ class Admin::CandidatesController < Admin::BaseController
   def probability_candidates
     @query = Candidate.search(params[:q])
     @candidates = @query.result(distict: true).where(probability: 1).order('created_at DESC')
+  end
+
+  def reply
+    @candidate = Candidate.find(params[:candidate_id])
+    @candidate_progress = @candidate.candidate_progress
+    if @candidate_progress.present?
+      @candidate_progress.update(replied_at: Date.today)
+    else
+      @candidate_progress = CandidateProgress.new(candidate_id: params[:candidate_id], replied_at: Date.today)
+      @candidate_progress.save
+    end
+    redirect_to progress_admin_candidates_path
+  end
+
+  def meeting
+    @candidate = Candidate.find(params[:candidate_id])
+    @candidate_progress = @candidate.candidate_progress
+    if @candidate_progress.present?
+      @candidate_progress.update(meeting_at: Date.today)
+    else
+      @candidate_progress = CandidateProgress.new(candidate_id: params[:candidate_id], meeting_at: Date.today)
+      @candidate_progress.save
+    end
+    redirect_to progress_admin_candidates_path
   end
 
   private
