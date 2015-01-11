@@ -16,9 +16,11 @@ table.table.table-striped
               = candidate.id
           td= link_to candidate.name, admin_candidate_path(candidate)
           td
-            = candidate.country.title
-            |/
-            = candidate.city.title
+            -if candidate.country.present?
+              = candidate.country.title
+              |/
+            -if candidate.city.present?
+              = candidate.city.title
           - if candidate.candidate_progress.present? and candidate.candidate_progress.sent_at.present?
             td= candidate.candidate_progress.sent_at.strftime('%Y-%m-%d')
           - else

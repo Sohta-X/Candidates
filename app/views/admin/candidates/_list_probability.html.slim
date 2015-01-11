@@ -13,9 +13,11 @@ table.table.table-striped
         td= image_tag candidate.image, class: 'img-circle', style: 'width: 60px;'
         td= link_to candidate.name, admin_candidate_path(candidate)
         td
-          = candidate.country.title
-          |/
-          = candidate.city.title
+          - if candidate.country.present?
+            = candidate.country.title
+            |/
+          - if candidate.city.present?
+            = candidate.city.title
         - if candidate.candidate_progress.meeting_at.present?
           td= candidate.candidate_progress.meeting_at.strftime('%Y-%m-%d')
         -else

@@ -3,8 +3,8 @@
   table.table
     - @candidate_memos.each do |candidate_memo|
       tr
-        th= CandidateDetail.human_attribute_name :name
-        td= candidate_memo.name
-      tr
-        th= CandidateDetail.human_attribute_name :sns_link
-        td= candidate_memo.memo
+        th= CandidateDetail.human_attribute_name :memo
+        td
+          = candidate_memo.memo
+          small.text-info
+            = candidate_memo.name

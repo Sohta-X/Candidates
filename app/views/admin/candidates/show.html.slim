@@ -9,11 +9,13 @@
       th= Candidate.human_attribute_name :name
       td= @candidate.name
     tr
-      th= Candidate.human_attribute_name :country
-      td= @candidate.country.title
+      - if @candidate.country.present?
+        th= Candidate.human_attribute_name :country
+        td= @candidate.country.title
     tr
-      th= Candidate.human_attribute_name :city
-      td= @candidate.city.title
+      - if @candidate.city.present?
+        th= Candidate.human_attribute_name :city
+        td= @candidate.city.title
     tr
       th= Candidate.human_attribute_name :personal_url
       td

@@ -12,9 +12,10 @@ table.table.table-striped
         td= candidate.id
         td= link_to candidate.name, admin_candidate_path(candidate)
         td
-          = candidate.country.title
-          |/
-          = candidate.city.title
+          - if candidate.country.present?
+            = candidate.country.title
+            |/
+            = candidate.city.title
         td
           -candidate.candidate_details.each do |detail|
             = link_to CandidateDetail::KIND.key(detail.kind), detail.sns_link

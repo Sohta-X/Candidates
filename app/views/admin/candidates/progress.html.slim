@@ -1,5 +1,5 @@
 .page_header
   h1= 'CandidatesProgress'
   = form_tag("/admin/candidates/progress_update", method: "post") do
-    = render partial: 'form_progress'
     =submit_tag 'Approached', class: 'btn btn-primary'
+    = render partial: 'form_progress'

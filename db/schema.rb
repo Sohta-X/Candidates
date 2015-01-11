@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150110065336) do
+ActiveRecord::Schema.define(version: 20150111140101) do
 
   create_table "candidate_details", force: true do |t|
     t.integer  "candidate_id"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20150110065336) do
     t.integer  "city_id"
     t.integer  "kind"
     t.string   "personal_url"
-    t.integer  "phone"
+    t.string   "phone"
     t.string   "email"
     t.string   "image"
     t.string   "status"
