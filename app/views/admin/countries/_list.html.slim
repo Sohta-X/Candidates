@@ -1,0 +1,10 @@
+table.table.table-striped
+  thead
+    tr
+      th= Country.human_attribute_name(:id)
+      th= Country.human_attribute_name(:title)
+  tbody
+    - @countries.each do |country|
+      tr
+        td= country.id
+        td= country.title

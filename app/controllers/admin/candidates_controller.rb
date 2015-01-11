@@ -96,6 +96,10 @@ class Admin::CandidatesController < Admin::BaseController
     redirect_to progress_admin_candidates_path
   end
 
+  def setting
+    render layout: 'no_sidebar'
+  end
+
   private
   def self.sort
     order('created_at DESC')

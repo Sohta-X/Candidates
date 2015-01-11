@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
   namespace :admin do
+    resources :countries
+    resources :cities
     resources :candidates do
       get 'progress', on: :collection
       post 'progress_update', on: :collection
@@ -8,5 +10,6 @@ Rails.application.routes.draw do
       get 'reply'
       get 'meeting'
     end
+    get 'pages/setting' => "pages#setting"
   end
 end

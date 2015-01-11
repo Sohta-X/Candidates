@@ -1,0 +1,7 @@
+= form_for [:admin, @country], html: {class: "form-horizontal"} do |f|
+  div.control-group
+    = f.label :country, class: 'control-label'
+    div.controls
+      = f.text_field :title
+  = f.submit 'SUBMIT', class: 'btn btn-primary'
+
