@@ -18,7 +18,7 @@ table.table.table-striped
             |/
           - if candidate.city.present?
             = candidate.city.title
-        - if candidate.candidate_progress.meeting_at.present?
+        - if candidate.candidate_progress.present? and candidate.candidate_progress.meeting_at.present?
           td= candidate.candidate_progress.meeting_at.strftime('%Y-%m-%d')
         -else
           td Not yet
