@@ -10,7 +10,6 @@ class Candidate < ActiveRecord::Base
   accepts_nested_attributes_for :candidate_progress
 
   validates :name, presence: true
-  validates :phone, numericality: true
 
   STATUS = { "got_contact" => 1, "approached_with_linkedin" => 2, "approached_with_email" => 3, "approached_with_xing" => 4, "approached_with_facebook" => 5}
   Probability = {"No" => 0, "Yes" => 1}
