@@ -13,4 +13,5 @@ Rails.application.routes.draw do
     end
     get 'pages/setting' => "pages#setting"
   end
+  root :to => 'admin/candidates#index'
 end
