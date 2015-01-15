@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150111140101) do
+ActiveRecord::Schema.define(version: 20150114145051) do
 
   create_table "candidate_details", force: true do |t|
     t.integer  "candidate_id"
@@ -44,17 +44,23 @@ ActiveRecord::Schema.define(version: 20150111140101) do
 
   add_index "candidate_progresses", ["candidate_id"], name: "index_candidate_progresses_on_candidate_id", using: :btree
 
+  create_table "candidate_types", force: true do |t|
+    t.string   "title",      default: "", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "candidates", force: true do |t|
-    t.string   "name",         default: "",  null: false
+    t.string   "name",              default: "",  null: false
     t.integer  "country_id"
     t.integer  "city_id"
-    t.integer  "kind"
+    t.integer  "candidate_type_id"
     t.string   "personal_url"
     t.string   "phone"
     t.string   "email"
     t.string   "image"
     t.string   "status"
-    t.string   "probability",  default: "0", null: false
+    t.string   "probability",       default: "0", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

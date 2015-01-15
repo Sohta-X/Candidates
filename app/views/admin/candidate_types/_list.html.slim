@@ -1,0 +1,10 @@
+table.table.table-striped
+  thead
+    tr
+      th= CandidateType.human_attribute_name(:id)
+      th= CandidateType.human_attribute_name(:title)
+    tbody
+      - @candidate_types.each do |i|
+        tr
+          td= i.id
+          td= i.title

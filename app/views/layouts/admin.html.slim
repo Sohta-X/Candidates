@@ -57,6 +57,10 @@ html lang="en"
                     span.add-on
                       |city
                     = f.select :city_id_eq, City.all.map {|u| [u.title, u.id] }, {prompt: ''}, {class: 'span18'}
+                  div.input-prepend
+                    span.add-on
+                      |type
+                    = f.collection_select :candidate_type_id_eq, CandidateType.all, :id, :title, {prompt: ''}, {class: 'span18'}
                   li 
                     = f.submit "search", class: 'btn'
         .span9

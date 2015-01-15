@@ -1,6 +1,7 @@
 .page-header
   h3
     |Candidate detail
+  p= link_to 'Edit', edit_admin_candidate_path(@candidate.id), class: 'btn btn-success'
   table.table
     tr
       th= Candidate.human_attribute_name :id

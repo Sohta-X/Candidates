@@ -10,7 +10,11 @@ table.table.table-striped
     - @candidates.each do |candidate|
       tr
         td= candidate.id
-        td= link_to candidate.name, admin_candidate_path(candidate)
+        td
+          = link_to candidate.name, admin_candidate_path(candidate)
+          small.muted
+          - if candidate.candidate_type.present?
+            = "(#{candidate.candidate_type.title})"
         td
           - if candidate.country.present?
             = candidate.country.title

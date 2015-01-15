@@ -16,9 +16,9 @@
     div.controls
       = f.text_field :personal_url
   div.control-group
-    = f.label :kind, class: 'control-label'
+    = f.label :candidate_type, class: 'control-label'
     div.controls
-      = f.select :kind, Candidate::KIND
+      = f.collection_select :candidate_type_id, CandidateType.all, :id, :title, include_blank: true
   div.control-group
     = f.label :phone, class: 'control-label'
     div.controls

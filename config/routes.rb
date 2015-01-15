@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :countries
     resources :cities
+    resources :candidate_types
     resources :candidates do
       get 'progress', on: :collection
       post 'progress_update', on: :collection

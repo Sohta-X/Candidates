@@ -1,0 +1,6 @@
+= form_for [:admin, @candidate_type], html: {class: "form-horizontal"} do |f|
+  div.control-group
+    = f.label :candidate_type, class: 'control-label'
+    div.controls
+      = f.text_field :title
+  = f.submit 'SUBMIT', class: 'btn btn-primary'
