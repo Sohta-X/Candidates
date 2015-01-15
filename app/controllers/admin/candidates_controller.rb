@@ -42,8 +42,6 @@ class Admin::CandidatesController < Admin::BaseController
       redirect_to admin_candidates_path
     else
       render 'edit', layout: 'no_sidebar'
-      @candidate.candidate_details.build
-      @candidate.candidate_memos.build
     end
   end
 
@@ -106,6 +104,6 @@ class Admin::CandidatesController < Admin::BaseController
   end
 
   def candidate_params
-    params.require(:candidate).permit(:name,:country_id,:city_id,:personal_url,:kind,:phone,:email,:image,:status,:probability, {candidate_details_attributes: [:candidate_id,:kind,:sns_link]}, {candidate_memos_attributes: [:candidate_id,:name,:memo]}, {candidate_progress_attributes: [:candidate_id, :sent_at, :replied_at, :meeting_at]})
+    params.require(:candidate).permit(:id, :name,:country_id,:city_id,:personal_url,:kind,:phone,:email,:image,:status,:probability, {candidate_details_attributes: [:id, :_destroy, :candidate_id,:kind,:sns_link]}, {candidate_memos_attributes: [:id, :_destroy, :candidate_id,:name,:memo]}, {candidate_progress_attributes: [:id, :_destroy, :candidate_id, :sent_at, :replied_at, :meeting_at]})
   end
 end
