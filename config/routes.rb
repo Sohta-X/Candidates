@@ -5,9 +5,13 @@ Rails.application.routes.draw do
     resources :cities
     resources :candidate_types
     resources :candidates do
-      get 'progress', on: :collection
-      post 'progress_update', on: :collection
-      get 'probability_candidates', on: :collection
+      collection do
+        get 'progress'
+        post 'progress_update'
+        get 'probability_candidates'
+        get 'import_csv_new'
+        post 'import_csv'
+      end
       get 'reply'
       get 'meeting'
     end

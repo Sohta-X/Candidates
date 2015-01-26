@@ -1,0 +1,9 @@
+h1 Import candidates
+= form_tag({controller: "candidates", action: "import_csv", method: "post"}, {multipart: true}) do
+  div.field
+    = label_tag "CSVファイル"
+    = file_field_tag :csv_file
+  div.action
+    = submit_tag "CSVを読み込む"
+
+

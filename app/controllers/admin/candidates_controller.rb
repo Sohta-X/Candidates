@@ -98,6 +98,22 @@ class Admin::CandidatesController < Admin::BaseController
     render layout: 'no_sidebar'
   end
 
+  def import_csv_new
+    render layout: 'no_sidebar'
+  end
+
+  def import_csv
+    if params[:csv_file].blank?
+      redirect_to import_csv_new_admin_candidates_path
+    else
+      candidates = csv_save(params[:csv_file])
+      candidates.each do |candidate|
+        candidate.save
+      end
+      redirect_to admin_candidates_path
+    end
+  end
+
   private
   def self.sort
     order('created_at DESC')
@@ -105,5 +121,29 @@ class Admin::CandidatesController < Admin::BaseController
 
   def candidate_params
     params.require(:candidate).permit(:id, :name,:country_id,:city_id,:personal_url,:kind,:phone,:email,:image,:status,:probability, {candidate_details_attributes: [:id, :_destroy, :candidate_id,:kind,:sns_link]}, {candidate_memos_attributes: [:id, :_destroy, :candidate_id,:name,:memo]}, {candidate_progress_attributes: [:id, :_destroy, :candidate_id, :sent_at, :replied_at, :meeting_at]})
+  end
+
+  def csv_save(csv_file)
+    require 'csv'
+    require 'kconv'
+
+    charactor = csv_file.read
+    datas = []
+
+    CSV.parse(charactor.kconv(Kconv::UTF8, Kconv::SJIS), headers: true) do |row|
+
+      candidate = Candidate.new
+      candidate.name = row[0]
+      candidate.country_id = row[1]
+      candidate.city_id = row[2]
+      candidate.candidate_type_id = row[3]
+      candidate.personal_url = row[4]
+      candidate.phone = row[5]
+      candidate.email = row[6]
+      candidate.image = row[7]
+      candidate.status = 1
+      datas << candidate
+    end
+    datas
   end
 end
