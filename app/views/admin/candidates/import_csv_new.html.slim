@@ -1,9 +1,22 @@
-h1 Import candidates
+h3 Import candidates
 = form_tag({controller: "candidates", action: "import_csv", method: "post"}, {multipart: true}) do
   div.field
-    = label_tag "CSVファイル"
-    = file_field_tag :csv_file
+    = file_field_tag :csv_file, class: 'btn'
   div.action
-    = submit_tag "CSVを読み込む"
-
-
+    = submit_tag "Import CSV", class: 'btn btn-primary', style: 'margin: 10px;'
+h3 Install CSV Template
+= link_to 'temlate.csv', '/temlate.csv', class: 'btn btn-success'
+h3 Precautions
+|You should type id when if it has prefix "_id"
+h4 country_id
+small
+  |refer to the URL 
+= link_to 'Countries List', admin_countries_path
+h4 city_id
+small
+  |refer to the URL 
+= link_to 'Cities List', admin_cities_path
+h4 candidate_type_id
+small
+  |refer to the URL 
+= link_to 'Candidate Types List', admin_candidate_types_path
